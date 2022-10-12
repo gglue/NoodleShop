@@ -1,12 +1,11 @@
 package noodleshop;
 
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class FinalOrder {
+public class ManualOrder {
 
     private String deliveryName;
     private String deliveryStreet;

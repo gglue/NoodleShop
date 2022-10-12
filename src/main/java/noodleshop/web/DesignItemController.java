@@ -2,7 +2,7 @@ package noodleshop.web;
 
 import lombok.extern.slf4j.Slf4j;
 import noodleshop.Extra;
-import noodleshop.FinalOrder;
+import noodleshop.ManualOrder;
 import noodleshop.Item;
 import noodleshop.ItemType;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("finalOrder")
+@SessionAttributes("manualOrder")
 public class DesignItemController {
 
     @ModelAttribute
@@ -34,9 +34,9 @@ public class DesignItemController {
         model.addAttribute("itemTypes", itemTypes);
     }
 
-    @ModelAttribute(name = "finalOrder")
-    public FinalOrder order() {
-        return new FinalOrder();
+    @ModelAttribute(name = "manualOrder")
+    public ManualOrder order() {
+        return new ManualOrder();
     }
 
     @ModelAttribute(name = "item")
@@ -50,9 +50,9 @@ public class DesignItemController {
     }
 
     @PostMapping
-    public String processNoodle(Item item, @ModelAttribute FinalOrder finalOrder) {
-        finalOrder.addItem(item);
+    public String processItem(Item item, @ModelAttribute ManualOrder manualOrder) {
+        manualOrder.addItem(item);
         log.info("Processing item: {}", item);
-        return "redirect:/";
+        return "redirect:/orders/current";
     }
 }

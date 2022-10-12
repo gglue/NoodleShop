@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manually Add Order</title>
+</head>
+<body>
+    <h1>Create an Order for Customer</h1>
+    <form method ="POST" th:action="@{/orders}" th:object="${manualOrder}">
+        <ul>
+            <li th:each="item : ${manualOrder.items}">
+                <span th:text="${item.name}">item name</span></li>
+            </li>
+        </ul>
+        <label for="deliveryName">Name: </label>
+        <input type="text" th:field="*{deliveryName}"/>
+        <br/>
+        <label for="deliveryStreet">Street address: </label>
+        <input type="text" th:field="*{deliveryStreet}"/>
+        <br/>
+        <label for="deliveryCity">City: </label>
+        <input type="text" th:field="*{deliveryCity}"/>
+        <br/>
+        <label for="deliveryState">Province: </label>
+        <input type="text" th:field="*{deliveryProv}"/>
+        <br/>
+        <label for="deliveryZip">Postal code: </label>
+        <input type="text" th:field="*{deliveryPost}"/>
+        <br/>
+        <label for="ccNumber">Credit Card #: </label>
+        <input type="text" th:field="*{ccNumber}"/>
+        <br/>
+        <label for="ccExpiration">Expiration: </label>
+        <input type="text" th:field="*{ccExpiration}"/>
+        <br/>
+        <label for="ccCVV">CVV: </label>
+        <input type="text" th:field="*{ccCVV}"/>
+        <br/>
+        <input type="submit" value="Submit Order"/>
+    </form>
+</body>
+</html>
