@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Design a Noodle!</title>
+</head>
+<body>
+    <h1>Create a New item</h1>
+    <form method="POST" th:object="${noodle}">
+        <div class = "grid">
+            <h3>Name your item</h3>
+            <input type="text" th:field="*{name}"/>
+            <h3>Give a description</h3>
+            <textarea th:field="*{desc}" rows="4" cols="50"></textarea>
+            <h3>Allowed Extras</h3>
+            <div th:each="extra : ${extras}">
+                <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
+                <span th:text="${extra.name}">EXTRA</span><br/>
+            </div>
+            <button>Submit Item</button>
+        </div>
+    </form>
+</body>
+</html>
