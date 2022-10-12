@@ -17,9 +17,9 @@ public class FinalOrder {
     private String ccExpiration;
     private String ccCVV;
 
-    private List<Noodle> noodles = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
-    public void addNoodle(Noodle noodle){
-        this.noodles.add(noodle);
+    public void addItem(Item item){
+        this.items.add(item);
     }
 }

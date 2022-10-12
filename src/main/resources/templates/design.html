@@ -6,12 +6,19 @@
 </head>
 <body>
     <h1>Create a New item</h1>
-    <form method="POST" th:object="${noodle}">
+    <form method="POST" th:object="${item}">
         <div class = "grid">
             <h3>Name your item</h3>
             <input type="text" th:field="*{name}"/>
             <h3>Give a description</h3>
             <textarea th:field="*{desc}" rows="4" cols="50"></textarea>
+            <h3>Item type</h3>
+            <div th:each="type :${itemTypes}">
+                <input th:field="*{type}" type="radio" th:value="${type.id}"/>
+                <span th:text="${type.desc}"></span></br>
+            </div>
+            <h3>Price</h3>
+            <input type="text" th:field="*{price}":/>
             <h3>Allowed Extras</h3>
             <div th:each="extra : ${extras}">
                 <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
