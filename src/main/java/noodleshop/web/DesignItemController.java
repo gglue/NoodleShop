@@ -7,8 +7,10 @@ import noodleshop.Item;
 import noodleshop.ItemType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,7 +52,12 @@ public class DesignItemController {
     }
 
     @PostMapping
-    public String processItem(Item item, @ModelAttribute ManualOrder manualOrder) {
+    public String processItem(@Valid Item item, Errors errors, @ModelAttribute ManualOrder manualOrder) {
+
+        if (errors.hasErrors()){
+            return "design";
+        }
+
         manualOrder.addItem(item);
         log.info("Processing item: {}", item);
         return "redirect:/orders/current";

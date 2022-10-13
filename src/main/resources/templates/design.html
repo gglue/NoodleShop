@@ -9,15 +9,27 @@
     <form method="POST" th:object="${item}">
         <div class = "grid">
             <h3>Name your item</h3>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Item name error
+            </span>
             <input type="text" th:field="*{name}"/>
             <h3>Give a description</h3>
             <textarea th:field="*{desc}" rows="4" cols="50"></textarea>
             <h3>Item type</h3>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('type')}"
+                  th:errors="*{type}">Item type error
+            </span>
             <div th:each="type :${itemTypes}">
                 <input th:field="*{type}" type="radio" th:value="${type.id}"/>
                 <span th:text="${type.desc}"></span></br>
             </div>
             <h3>Price</h3>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('price')}"
+                  th:errors="*{price}">Price error
+            </span>
             <input type="text" th:field="*{price}":/>
             <h3>Allowed Extras</h3>
             <div th:each="extra : ${extras}">

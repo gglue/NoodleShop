@@ -1,13 +1,24 @@
 package noodleshop;
 
 import lombok.Data;
+
+import javax.validation.constraints.*;
 import java.util.List;
 @Data
 public class Item {
+
+    @NotNull
+    @Size(min=3, message="Please give the item a proper name.")
     private String name;
+
+    @NotNull(message="Please label the type of the item.")
     private ItemType type;
+
     private String desc;
+
     private List<Extra> extras;
+
+    @Min(message="Item show be at least be 1 dollar.", value=100)
     private int price;
 
 }
