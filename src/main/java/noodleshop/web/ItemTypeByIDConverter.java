@@ -1,25 +1,19 @@
 package noodleshop.web;
 
-import noodleshop.Extra;
 import noodleshop.ItemType;
+import noodleshop.data.TypeRepository;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
-public class ItemTypeByIDConverter implements Converter<String, ItemType> {
+public class ItemTypeByIDConverter implements Converter<Long, ItemType> {
 
-    private Map<String, ItemType> itemMap = new HashMap<>();
-    public ItemTypeByIDConverter(){
-        itemMap.put("0", new ItemType(0,"Noodle"));
-        itemMap.put("1", new ItemType(1,"Side"));
-        itemMap.put("2", new ItemType(1,"Drink"));
-    }
+    private TypeRepository typeRepo;
+    public ItemTypeByIDConverter(TypeRepository typeRepo){this.typeRepo = typeRepo;}
 
     @Override
-    public ItemType convert (String id){
-        return itemMap.get(id);
+    public ItemType convert (Long id){
+        return typeRepo.findById(id).orElse(null);
     }
 }

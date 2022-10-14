@@ -1,6 +1,8 @@
 package noodleshop.web;
 
 import noodleshop.Extra;
+import noodleshop.data.ExtraRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -8,16 +10,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class ExtraByIDConverter implements Converter<String, Extra> {
+public class ExtraByIDConverter implements Converter<Long, Extra> {
 
-    private Map<String, Extra> extraMap = new HashMap<>();
-    public ExtraByIDConverter(){
-        extraMap.put("0", new Extra(0,"Extra Noodle", 100));
-        extraMap.put("1", new Extra(1,"Extra Soup", 100));
+    private ExtraRepository extraRepo;
+
+    @Autowired
+    public ExtraByIDConverter(ExtraRepository extraRepo){
+        this.extraRepo = extraRepo;
     }
 
     @Override
-    public Extra convert (String id){
-        return extraMap.get(id);
+    public Extra convert (Long id){
+        return extraRepo.findById(id).orElse(null);
     }
 }

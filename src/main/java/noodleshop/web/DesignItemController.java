@@ -5,13 +5,16 @@ import noodleshop.Extra;
 import noodleshop.ManualOrder;
 import noodleshop.Item;
 import noodleshop.ItemType;
+import noodleshop.data.ExtraRepository;
+import noodleshop.data.ItemRepository;
+import noodleshop.data.TypeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -20,19 +23,30 @@ import java.util.List;
 @SessionAttributes("manualOrder")
 public class DesignItemController {
 
+    private final ExtraRepository extraRepo;
+    private final TypeRepository typeRepo;
+    private final ItemRepository itemRepo;
+
+    public DesignItemController(ExtraRepository extraRepo, TypeRepository typeRepo, ItemRepository itemRepo){
+        this.extraRepo = extraRepo;
+        this.typeRepo = typeRepo;
+        this.itemRepo = itemRepo;
+    }
+
     @ModelAttribute
     public void addExtrasToModel(Model model) {
-        List<Extra> extras = Arrays.asList(
-                new Extra(0,"Extra Noodle", 100),
-                new Extra(1,"Extra Soup", 100)
-        );
+        Iterable<Extra> extras = extraRepo.findAll();
+        List<Extra> extraList = new ArrayList<>();
+        for (Extra extra : extras){
+            extraList.add(extra);
+        }
         model.addAttribute("extras", extras);
 
-        List<ItemType> itemTypes = Arrays.asList(
-                new ItemType(0,"Noodle"),
-                new ItemType(1,"Side"),
-                new ItemType(2,"Drink")
-        );
+        Iterable<ItemType> itemTypes = typeRepo.findAll();
+        List<ItemType> itemList = new ArrayList<>();
+        for (ItemType itemType: itemTypes){
+            itemList.add(itemType);
+        }
         model.addAttribute("itemTypes", itemTypes);
     }
 
@@ -57,8 +71,8 @@ public class DesignItemController {
         if (errors.hasErrors()){
             return "design";
         }
-
         manualOrder.addItem(item);
+        itemRepo.save(item);
         log.info("Processing item: {}", item);
         return "redirect:/orders/current";
     }
