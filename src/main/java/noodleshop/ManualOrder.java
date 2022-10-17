@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
@@ -43,9 +45,10 @@ public class ManualOrder {
     @Digits(integer=3, fraction=0, message="Invalid CVV")
     private String ccCVV;
 
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<CustomItem> items = new ArrayList<>();
 
-    public void addItem(Item item){
+    public void addItem(CustomItem item){
         this.items.add(item);
     }
 }

@@ -20,7 +20,6 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("manualOrder")
 public class DesignItemController {
 
     private final ExtraRepository extraRepo;
@@ -71,9 +70,9 @@ public class DesignItemController {
         if (errors.hasErrors()){
             return "design";
         }
-        manualOrder.addItem(item);
+        //manualOrder.addItem(item);
         itemRepo.save(item);
         log.info("Processing item: {}", item);
-        return "redirect:/orders/current";
+        return "redirect:/select";
     }
 }

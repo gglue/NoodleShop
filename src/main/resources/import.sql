@@ -1,0 +1,21 @@
+insert into Extra (id, name, price) values (0,'Extra Noodle', 100);
+insert into Extra (id, name, price) values (1,'Extra Soup', 100);
+insert into Extra (id, name, price) values (2,'Extra Bok Choy', 200);
+insert into Extra (id, name, price) values (3,'Extra Egg', 150);
+insert into Extra (id, name, price) values (4,'Extra Sliced Beef', 300);
+insert into Extra (id, name, price) values (5,'Extra Beef Brisket', 300);
+insert into Extra (id, name, price) values (6,'Extra Braised Pork Belly', 300);
+insert into Extra (id, name, price) values (7,'Extra Pig Intestines', 300);
+insert into Extra (id, name, price) values (8,'Extra Lamb', 300);
+insert into Item_Type (id, desc) values (0, 'Noodle');
+insert into Item_Type (id, desc) values (1, 'Side');
+insert into Item_Type (id, desc) values (2, 'Drink');
+
+insert into Item (id, name, type_id, desc, price) values (0, 'Magic Beef', 0, 'Yum', 999);
+insert into Item (id, name, type_id, desc, price) values (1, 'The Magic', 0, 'Yum', 1399);
+insert into Item (id, name, type_id, desc, price) values (2, 'Magic Lamb', 0, 'Yum', 1499);
+insert into Item (id, name, type_id, desc, price) values (3, 'G. I. Ju', 0, 'Yum', 1299);
+insert into Item (id, name, type_id, desc, price) values (4, 'Triple B', 0, 'Yum', 1299);
+insert into Item (id, name, type_id, desc, price) values (5, 'Magic Chicken', 0, 'Yum', 1299);
+insert into Item (id, name, type_id, desc, price) values (6, 'Shrimp & Pork Wonton', 0, 'Yum', 1199);
+insert into Item (id, name, type_id, desc, price) values (7, 'Tree Hugger', 0, 'Yum', 1099);

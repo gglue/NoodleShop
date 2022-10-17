@@ -23,9 +23,6 @@ public class Item {
 
     private String desc;
 
-    @ManyToMany
-    private List<Extra> extras;
-
     @Min(message="Item show be at least be 1 dollar.", value=100)
     private int price;
 

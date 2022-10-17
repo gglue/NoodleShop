@@ -31,11 +31,13 @@
                   th:errors="*{price}">Price error
             </span>
             <input type="text" th:field="*{price}":/>
+            <!--
             <h3>Allowed Extras</h3>
             <div th:each="extra : ${extras}">
                 <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
                 <span th:text="${extra.name}">EXTRA</span><br/>
             </div>
+            -->
             <button>Submit Item</button>
         </div>
     </form>
