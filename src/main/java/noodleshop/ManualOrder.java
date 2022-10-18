@@ -18,8 +18,10 @@ import java.util.List;
 public class ManualOrder {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     private Long id;
+
     private Date placedAt;
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
@@ -47,6 +49,8 @@ public class ManualOrder {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<CustomItem> items = new ArrayList<>();
+
+    private int finalPrice;
 
     public void addItem(CustomItem item){
         this.items.add(item);

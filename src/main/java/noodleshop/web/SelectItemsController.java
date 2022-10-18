@@ -69,9 +69,12 @@ public class SelectItemsController {
         //    log.info("Error.", customItem);
         //    return "menu";
         //}
+
         customItemRepo.save(customItem);
         customItem.setTotalPrice(customItemRepo.evaluateTotalItemPrice(customItem.getId()));
+        customItemRepo.updateTotalItemPrice(customItem.getId(), customItem.getTotalPrice());
         manualOrder.addItem(customItem);
+        manualOrder.setFinalPrice(customItemRepo.getSumOfItemPrices());
         log.info("Processing item: {}", customItem);
         return "menu";
     }

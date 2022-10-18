@@ -5,7 +5,6 @@ import noodleshop.CustomItem;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface CustomItemRepository extends CrudRepository<CustomItem, Long> {
@@ -23,4 +22,15 @@ public interface CustomItemRepository extends CrudRepository<CustomItem, Long> {
             "WHERE ID = ?1\n" +
             "GROUP BY ID", nativeQuery = true)
     public int evaluateTotalItemPrice(Long itemID);
+
+    @Transactional
+    @Modifying
+    @Query(value="UPDATE CUSTOM_ITEM\n" +
+            "SET TOTAL_PRICE = ?2\n" +
+            "WHERE ID = ?1", nativeQuery = true)
+    public void updateTotalItemPrice(Long itemID, int price);
+
+    @Transactional
+    @Query(value="SELECT SUM(TOTAL_PRICE) FROM CUSTOM_ITEM", nativeQuery = true)
+    public int getSumOfItemPrices();
 }
