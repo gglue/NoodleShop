@@ -7,11 +7,6 @@
 <body>
     <h1>Create an Order for Customer</h1>
     <form method ="POST" th:action="@{/orders}" th:object="${manualOrder}">
-        <ul>
-            <li th:each="item : ${manualOrder.items}">
-                <span th:text="${item.name}">item name</span></li>
-            </li>
-        </ul>
         <label for="deliveryName">Name: </label>
         <span class="validationError"
               th:if="${#fields.hasErrors('deliveryName')}"
@@ -70,5 +65,18 @@
         <br/>
         <input type="submit" value="Submit Order"/>
     </form>
+    <h1>Current selected items</h1>
+    <ul>
+        <li th:each="item : ${manualOrder?.items}">
+            <span th:text="|${item.item.name} (${item.totalPrice})|">item name</span>
+            <ul>
+                <li th:text="|${item.item.name} (${item.item.price})|"></li>
+                <li th:each="extra : ${item?.extras}">
+                    <span th:text="|${extra.name} (${extra.price})|"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h2>Total Price: <span th:text="${manualOrder?.finalPrice}"></span></h2>
 </body>
 </html>

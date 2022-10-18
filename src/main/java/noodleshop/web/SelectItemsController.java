@@ -77,7 +77,6 @@ public class SelectItemsController {
         for (Extra e : customItem.getExtras()){
             customItem.setTotalPrice(customItem.getTotalPrice() + e.getPrice());
         }
-
         customItem.setTotalPrice(customItem.getTotalPrice() + customItem.getItem().getPrice());
         manualOrder.addItem(customItem);
         manualOrder.setFinalPrice(manualOrder.getFinalPrice() + customItem.getTotalPrice());

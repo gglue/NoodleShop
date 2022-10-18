@@ -49,11 +49,6 @@ public class DesignItemController {
         model.addAttribute("itemTypes", itemTypes);
     }
 
-    @ModelAttribute(name = "manualOrder")
-    public ManualOrder order() {
-        return new ManualOrder();
-    }
-
     @ModelAttribute(name = "item")
     public Item item() {
         return new Item();
@@ -65,12 +60,11 @@ public class DesignItemController {
     }
 
     @PostMapping
-    public String processItem(@Valid Item item, Errors errors, @ModelAttribute ManualOrder manualOrder) {
+    public String processItem(@Valid Item item, Errors errors) {
 
         if (errors.hasErrors()){
             return "design";
         }
-        //manualOrder.addItem(item);
         itemRepo.save(item);
         log.info("Processing item: {}", item);
         return "redirect:/select";

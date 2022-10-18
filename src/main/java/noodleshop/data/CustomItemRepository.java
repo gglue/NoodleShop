@@ -35,4 +35,5 @@ public interface CustomItemRepository extends CrudRepository<CustomItem, Long> {
     @Query(value="SELECT SUM(TOTAL_PRICE) FROM CUSTOM_ITEM", nativeQuery = true)
     public int getSumOfItemPrices();
     **/
+
 }

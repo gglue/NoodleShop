@@ -1,7 +1,9 @@
 package noodleshop.web;
 
+import noodleshop.CustomItem;
 import noodleshop.ManualOrder;
 import lombok.extern.slf4j.Slf4j;
+import noodleshop.data.OrderRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,12 @@ import javax.validation.Valid;
 @SessionAttributes("manualOrder")
 public class OrderController {
 
+    private final OrderRepository orderRepo;
+
+    public OrderController(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
+
     @GetMapping("/current")
     public String orderForm(){
         return "orderForm";
@@ -29,6 +37,12 @@ public class OrderController {
         if (errors.hasErrors()){
             return "orderForm";
         }
+
+        orderRepo.save(order);
+        for (CustomItem item : order.getItems()){
+            item.setOrderID(order.getId());
+        }
+        orderRepo.save(order);
 
         log.info("Order submitted: {}", order);
         sessionStatus.setComplete();

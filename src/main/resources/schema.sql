@@ -23,7 +23,8 @@ create table if not exists Item (
 create table if not exists Custom_Item (
     id identity,
     total_Price smallint not null,
-    item bigint not null
+    item bigint not null,
+    orderID bigint not null
     );
 
 create table if not exists Item_Type (
@@ -36,9 +37,3 @@ create table if not exists Extra (
     name varchar(25) not null,
     price smallint not null
     );
-
-/*alter table Item_Extras
-    add foreign key (extra) references Extra(id);
-alter table Item_Extras
-    add foreign key (item) references Item(id);
- */

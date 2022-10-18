@@ -22,6 +22,6 @@ public class CustomItem {
     @ManyToMany
     private List<Extra> extras;
 
-    @ManyToOne
-    private ManualOrder order;
+    //@ManyToOne
+    private Long orderID;
 }

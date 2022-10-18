@@ -18,7 +18,7 @@
             <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
             <span th:text="|${extra.name} (${extra.price})|">EXTRA</span><br/>
         </div>
-        <button>Continue Order</button>
+        <button>Add another item</button>
     </form>
     <h1>Current selected items</h1>
     <ul>
@@ -33,5 +33,6 @@
         </li>
     </ul>
     <h2>Total Price: <span th:text="${manualOrder?.finalPrice}"></span></h2>
+    <a th:href="@{/orders/current}" id>Checkout your order.</a>
 </body>
 </html>
