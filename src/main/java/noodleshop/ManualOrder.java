@@ -2,11 +2,9 @@ package noodleshop;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
@@ -14,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Table
+@Entity
 public class ManualOrder {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date placedAt;
@@ -47,7 +44,7 @@ public class ManualOrder {
     @Digits(integer=3, fraction=0, message="Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<CustomItem> items = new ArrayList<>();
 
     private int finalPrice;

@@ -3,6 +3,7 @@ package noodleshop;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -20,4 +21,7 @@ public class CustomItem {
 
     @ManyToMany
     private List<Extra> extras;
+
+    @ManyToOne
+    private ManualOrder order;
 }
