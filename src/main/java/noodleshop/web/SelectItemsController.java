@@ -70,11 +70,17 @@ public class SelectItemsController {
         //    return "menu";
         //}
 
-        customItemRepo.save(customItem);
-        customItem.setTotalPrice(customItemRepo.evaluateTotalItemPrice(customItem.getId()));
-        customItemRepo.updateTotalItemPrice(customItem.getId(), customItem.getTotalPrice());
+        //customItemRepo.save(customItem);
+        //customItem.setTotalPrice(customItemRepo.evaluateTotalItemPrice(customItem.getId()));
+        //customItemRepo.updateTotalItemPrice(customItem.getId(), customItem.getTotalPrice());
+
+        for (Extra e : customItem.getExtras()){
+            customItem.setTotalPrice(customItem.getTotalPrice() + e.getPrice());
+        }
+
+        customItem.setTotalPrice(customItem.getTotalPrice() + customItem.getItem().getPrice());
         manualOrder.addItem(customItem);
-        manualOrder.setFinalPrice(customItemRepo.getSumOfItemPrices());
+        manualOrder.setFinalPrice(manualOrder.getFinalPrice() + customItem.getTotalPrice());
         log.info("Processing item: {}", customItem);
         return "menu";
     }

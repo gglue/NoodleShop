@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface CustomItemRepository extends CrudRepository<CustomItem, Long> {
 
+    /**
     @Transactional
     @Query(value="SELECT SUM(PRICE) AS TOTAL_PRICE FROM\n" +
             "(SELECT distinct CUSTOM_ITEM.ID , ITEM.PRICE FROM CUSTOM_ITEM\n" +
@@ -33,4 +34,5 @@ public interface CustomItemRepository extends CrudRepository<CustomItem, Long> {
     @Transactional
     @Query(value="SELECT SUM(TOTAL_PRICE) FROM CUSTOM_ITEM", nativeQuery = true)
     public int getSumOfItemPrices();
+    **/
 }
