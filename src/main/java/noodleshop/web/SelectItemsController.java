@@ -69,11 +69,10 @@ public class SelectItemsController {
         //    log.info("Error.", customItem);
         //    return "menu";
         //}
-
-        manualOrder.addItem(customItem);
         customItemRepo.save(customItem);
-        customItemRepo.updateItemPrice(customItem);
+        customItem.setTotalPrice(customItemRepo.evaluateTotalItemPrice(customItem.getId()));
+        manualOrder.addItem(customItem);
         log.info("Processing item: {}", customItem);
-        return "redirect:/";
+        return "menu";
     }
 }

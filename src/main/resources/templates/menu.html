@@ -20,5 +20,17 @@
         </div>
         <button>Continue Order</button>
     </form>
+    <h1>Current selected items</h1>
+    <ul>
+        <li th:each="item : ${manualOrder?.items}">
+            <span th:text="|${item.item.name} (${item.totalPrice})|">item name</span>
+            <ul>
+                <li th:text="|${item.item.name} (${item.item.price})|"></li>
+                <li th:each="extra : ${item?.extras}">
+                    <span th:text="|${extra.name} (${extra.price})|"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </body>
 </html>
