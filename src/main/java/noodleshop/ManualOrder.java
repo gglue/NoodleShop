@@ -15,7 +15,7 @@ import java.util.List;
 public class ManualOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date placedAt = new Date();
@@ -49,6 +49,8 @@ public class ManualOrder {
 
     private int finalPrice;
 
+    @ManyToOne
+    private NoodleUser user;
     public void addItem(CustomItem item){
         this.items.add(item);
     }

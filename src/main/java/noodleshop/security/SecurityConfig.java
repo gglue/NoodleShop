@@ -1,6 +1,6 @@
 package noodleshop.security;
-import noodleshop.EmployeeUser;
-import noodleshop.data.EmployeeRepository;
+import noodleshop.NoodleUser;
+import noodleshop.data.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -22,9 +22,9 @@ public class SecurityConfig  {
 
 
     @Bean
-    public UserDetailsService userDetailsService(EmployeeRepository employeeRepo) {
+    public UserDetailsService userDetailsService(UserRepository userRepo) {
         return username -> {
-            EmployeeUser user = employeeRepo.findByUsername(username);
+            NoodleUser user = userRepo.findByUsername(username);
             if (user != null) return user;
             throw new UsernameNotFoundException("User '" + username + "' not found");
         };

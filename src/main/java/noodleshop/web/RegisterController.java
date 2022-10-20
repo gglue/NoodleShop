@@ -1,7 +1,7 @@
 package noodleshop.web;
 import lombok.extern.slf4j.Slf4j;
-import noodleshop.data.EmployeeRepository;
-import noodleshop.security.EmployeeRegistrationForm;
+import noodleshop.data.UserRepository;
+import noodleshop.security.NoodleRegistrationForm;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,25 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/employeeregister")
+@RequestMapping("/register")
 public class RegisterController {
 
-    private EmployeeRepository userRepo;
+    private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
 
-    public RegisterController(EmployeeRepository userRepo, PasswordEncoder passwordEncoder){
+    public RegisterController(UserRepository userRepo, PasswordEncoder passwordEncoder){
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
     public String registerForm(){
-        return "EmployeeRegister";
+        return "register";
     }
 
-    @PreAuthorize("hasUser('ADMIN')")
     @PostMapping
-    public String processRegistration(EmployeeRegistrationForm form){
+    public String processRegistration(NoodleRegistrationForm form){
         userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/";
     }

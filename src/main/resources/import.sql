@@ -20,5 +20,6 @@ insert into Item (name, type_id, desc, price) values ('Magic Chicken', 0, 'Yum',
 insert into Item (name, type_id, desc, price) values ('Shrimp & Pork Wonton', 0, 'Yum', 1199);
 insert into Item (name, type_id, desc, price) values ('Tree Hugger', 0, 'Yum', 1099);
 
-insert into Customer_User (id, city, full_name, password, phone_number, postal, province, street, username) values (1, 'Toronto', 'Victor Li', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG','647-710-8780','M1V3C1','ON','27 Historic Terrace', 'customer');
-insert into Employee_User (id, username, password) values (1, 'employee', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG');
+insert into Noodle_User (city, full_name, password, phone_number, postal, province, street, username, is_Admin) values ('Toronto', 'Victor Li', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG','647-710-8780','M1V3C1','ON','27 Historic Terrace', 'admin', 1);
+insert into Noodle_User (city, full_name, password, phone_number, postal, province, street, username, is_Admin) values ('Toronto', 'Tom Ling', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG','416-736-6000','M3J2C7','ON','1027 Finch Ave W,', 'customer', 0);
+

@@ -60,7 +60,7 @@ public class DesignItemController {
         return "design";
     }
 
-    @PreAuthorize("hasUser('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public String processItem(@Valid Item item, Errors errors) {
 

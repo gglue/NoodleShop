@@ -38,10 +38,11 @@ create table if not exists Extra (
     price smallint not null
     );
 
-create table if not exists Customer_User (
+create table if not exists Noodle_User (
     id identity,
     username varchar(100) not null,
     password varchar(100) not null,
+    is_Admin number(1) not null,
     city varchar(25) not null,
     postal varchar(6) not null,
     province varchar(25) not null,
@@ -50,8 +51,3 @@ create table if not exists Customer_User (
     full_name varchar(50) not null
     );
 
-create table if not exists Employee_User (
-    id identity,
-    username varchar(100) not null,
-    password varchar(100) not null
-);

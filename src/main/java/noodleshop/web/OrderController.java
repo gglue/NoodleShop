@@ -3,8 +3,10 @@ package noodleshop.web;
 import noodleshop.CustomItem;
 import noodleshop.ManualOrder;
 import lombok.extern.slf4j.Slf4j;
+import noodleshop.NoodleUser;
 import noodleshop.data.OrderRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,12 +36,12 @@ public class OrderController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    public String processOrder(@Valid ManualOrder order, Errors errors, SessionStatus sessionStatus) {
+    public String processOrder(@Valid ManualOrder order, Errors errors, SessionStatus sessionStatus, @AuthenticationPrincipal NoodleUser user) {
 
         if (errors.hasErrors()){
             return "orderForm";
         }
-
+        order.setUser(user);
         orderRepo.save(order);
         for (CustomItem item : order.getItems()){
             item.setOrderID(order.getId());
