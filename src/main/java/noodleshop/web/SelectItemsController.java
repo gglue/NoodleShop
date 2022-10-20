@@ -5,6 +5,7 @@ import noodleshop.*;
 import noodleshop.data.CustomItemRepository;
 import noodleshop.data.ExtraRepository;
 import noodleshop.data.ItemRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -63,6 +64,7 @@ public class SelectItemsController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String processCustomItem(@Valid CustomItem customItem, Errors errors, @ModelAttribute ManualOrder manualOrder) {
 
         //if (errors.hasErrors()){
@@ -70,17 +72,13 @@ public class SelectItemsController {
         //    return "menu";
         //}
 
-        //customItemRepo.save(customItem);
-        //customItem.setTotalPrice(customItemRepo.evaluateTotalItemPrice(customItem.getId()));
-        //customItemRepo.updateTotalItemPrice(customItem.getId(), customItem.getTotalPrice());
-
         for (Extra e : customItem.getExtras()){
             customItem.setTotalPrice(customItem.getTotalPrice() + e.getPrice());
         }
         customItem.setTotalPrice(customItem.getTotalPrice() + customItem.getItem().getPrice());
         manualOrder.addItem(customItem);
         manualOrder.setFinalPrice(manualOrder.getFinalPrice() + customItem.getTotalPrice());
-        log.info("Processing item: {}", customItem);
+        //log.info("Processing item: {}", customItem);
         return "menu";
     }
 }

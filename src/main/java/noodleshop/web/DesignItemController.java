@@ -8,6 +8,7 @@ import noodleshop.ItemType;
 import noodleshop.data.ExtraRepository;
 import noodleshop.data.ItemRepository;
 import noodleshop.data.TypeRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -59,6 +60,7 @@ public class DesignItemController {
         return "design";
     }
 
+    @PreAuthorize("hasUser('ADMIN')")
     @PostMapping
     public String processItem(@Valid Item item, Errors errors) {
 

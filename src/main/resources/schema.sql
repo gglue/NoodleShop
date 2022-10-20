@@ -37,3 +37,21 @@ create table if not exists Extra (
     name varchar(25) not null,
     price smallint not null
     );
+
+create table if not exists Customer_User (
+    id identity,
+    username varchar(100) not null,
+    password varchar(100) not null,
+    city varchar(25) not null,
+    postal varchar(6) not null,
+    province varchar(25) not null,
+    street varchar(50) not null,
+    phone_number varchar(25) not null,
+    full_name varchar(50) not null
+    );
+
+create table if not exists Employee_User (
+    id identity,
+    username varchar(100) not null,
+    password varchar(100) not null
+);
