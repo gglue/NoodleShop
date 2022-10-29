@@ -78,7 +78,7 @@ public class SelectItemsController {
         customItem.setTotalPrice(customItem.getTotalPrice() + customItem.getItem().getPrice());
         manualOrder.addItem(customItem);
         manualOrder.setFinalPrice(manualOrder.getFinalPrice() + customItem.getTotalPrice());
-        //log.info("Processing item: {}", customItem);
+        log.info("Processing item: {}", customItem);
         return "menu";
     }
 }

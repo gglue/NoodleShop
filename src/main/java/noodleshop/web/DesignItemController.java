@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +56,13 @@ public class DesignItemController {
         return new Item();
     }
 
+    @RolesAllowed("ROLE_ADMIN")
     @GetMapping
     public String showDesignForm() {
         return "design";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @RolesAllowed("ROLE_ADMIN")
     @PostMapping
     public String processItem(@Valid Item item, Errors errors) {
 

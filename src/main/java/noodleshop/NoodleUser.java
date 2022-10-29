@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.
         SimpleGrantedAuthority;
@@ -59,5 +61,10 @@ public class NoodleUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @JsonIgnore
+    public String getPassword(){
+        return password;
     }
 }
