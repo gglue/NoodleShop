@@ -22,6 +22,8 @@ public class Item {
 
     private String desc;
 
+    private String image;
+
     @Min(message="Item show be at least be 1 dollar.", value=100)
     private int price;
 

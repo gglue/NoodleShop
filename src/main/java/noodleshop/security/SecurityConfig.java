@@ -86,12 +86,14 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
-                .authorizeRequests( auth -> auth
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf().disable()
+                .authorizeRequests()
+                    .antMatchers("/design/**", "/h2-console/**").hasRole("ADMIN")
+                    .antMatchers("/orders/**", "/select/**").hasAnyRole("ADMIN","USER")
+                    .antMatchers("/", "/**").access("permitAll()")
+                .and()
+                //.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(withDefaults())
                 .build();
     }

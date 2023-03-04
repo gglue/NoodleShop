@@ -17,6 +17,7 @@ create table if not exists Item (
     name varchar(50) not null,
     type bigint not null,
     desc varchar(200) not null,
+    image varchar(200) not null,
     price smallint not null
     );
 
