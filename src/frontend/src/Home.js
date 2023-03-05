@@ -20,7 +20,7 @@ function Home() {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        let uri = "http://10.0.0.110:8080/token";
+        let uri = "http://10.0.0.109:8080/token";
         axios.post(uri, {}, {
             auth: {
                 username: input.username,
@@ -28,7 +28,8 @@ function Home() {
             }
         })
             .then(res =>{
-                localStorage.setItem('token', res.data)
+                localStorage.setItem('token', res.data);
+                localStorage.setItem('name', input.username);
                 console.log(res.data);
             })
             .catch(res =>{
