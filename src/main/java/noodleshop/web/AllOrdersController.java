@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import noodleshop.ManualOrder;
 import noodleshop.data.OrderRepository;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +38,21 @@ public class AllOrdersController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String showAllOrders(){
         return "allOrders";
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public String showSpecificOrder(@PathVariable String id, Model model){
+        ManualOrder specificOrder = orderRepo.findById(Long.parseLong(id)).get();
+        model.addAttribute("thatOrder", specificOrder);
+        return "specificOrder";
+    }
+
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String processManualOrder(@RequestParam String status, @RequestParam String orderID){
         ManualOrder tempOrder = orderRepo.findById(Long.parseLong(orderID)).get();
         tempOrder.setStatus(Integer.parseInt(status));
