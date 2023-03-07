@@ -31,11 +31,6 @@ public class NoodleUser implements UserDetails {
     private final String password;
     private final int isAdmin;
     private final String fullName;
-    private final String street;
-    private final String city;
-    private final String province;
-    private final String postal;
-    private final String phoneNumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

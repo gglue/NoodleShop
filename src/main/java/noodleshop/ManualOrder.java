@@ -50,6 +50,8 @@ public class ManualOrder {
 
     private int finalPrice;
 
+    private int status;
+
     @ManyToOne
     private NoodleUser user;
     public void addItem(CustomItem item){

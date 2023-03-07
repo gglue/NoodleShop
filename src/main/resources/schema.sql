@@ -9,7 +9,8 @@ create table if not exists Manual_Order (
     cc_expiration varchar(5) not null,
     cc_cvv varchar(3) not null,
     placed_At timestamp not null,
-    final_Price bigint not null
+    final_Price bigint not null,
+    status smallint not null
     );
 
 create table if not exists Item (
@@ -44,11 +45,6 @@ create table if not exists Noodle_User (
     username varchar(100) not null,
     password varchar(100) not null,
     is_Admin number(1) not null,
-    city varchar(25) not null,
-    postal varchar(6) not null,
-    province varchar(25) not null,
-    street varchar(50) not null,
-    phone_number varchar(25) not null,
     full_name varchar(50) not null
     );
 

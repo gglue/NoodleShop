@@ -20,6 +20,6 @@ insert into Item (name, type_id, desc, image, price) values ('Magic Chicken', 0,
 insert into Item (name, type_id, desc, image, price) values ('Smokey Duck', 0, 'Smoked duck is a specialty of Szechuan that is known for its complex cooking process. Our juicy smoked duck breast is marinated, smoked, and braised to perfection, and is an excellent pair for our wholesome noodle soup.', 'smokeyduck.png', 1299);
 insert into Item (name, type_id, desc, image, price) values ('Tree Hugger', 0, 'The perfect vegetarian option, the Tree Hugger features our chewy freshly-made noodles, submerged in our light refreshing vegetable stock, topped with tasty veggies, shiitake mushrooms and fried egg.', 'treehugger.png', 1099);
 
-insert into Noodle_User (city, full_name, password, phone_number, postal, province, street, username, is_Admin) values ('Toronto', 'Victor Li', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG','647-710-8780','M1V3C1','ON','27 Historic Terrace', 'admin', 1);
-insert into Noodle_User (city, full_name, password, phone_number, postal, province, street, username, is_Admin) values ('Toronto', 'Tom Ling', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG','416-736-6000','M3J2C7','ON','1027 Finch Ave W,', 'customer', 0);
+insert into Noodle_User (full_name, password, username, is_Admin) values ('Victor Li', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG', 'admin', 1);
+insert into Noodle_User (full_name, password, username, is_Admin) values ('Tom Ling',  '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG', 'customer', 0);
 
