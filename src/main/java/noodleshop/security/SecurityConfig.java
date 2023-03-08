@@ -89,7 +89,7 @@ public class SecurityConfig  {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/design/**", "/h2-console/**").hasRole("ADMIN")
-                    .antMatchers("/orders/**", "/select/**").hasAnyRole("ADMIN","USER")
+                    .antMatchers("/orders/**", "/select/**", "/list/**").hasAnyRole("ADMIN","USER")
                     .antMatchers("/", "/**").access("permitAll()")
                 .and()
                 //.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

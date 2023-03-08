@@ -23,8 +23,8 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="pt-3">
+    <div class="container" sec:authorize="hasRole('ROLE_USER')">
+        <div class="pt-3" th:if="${(#authentication.name == thatOrder.user.username)}">
             <div class="card text-center">
             <div class="card-header">
                 Your Order
@@ -52,6 +52,40 @@
             </ul>
         </div>
         </div>
+        <div class="pt-3">
+            <h5>Order not found or not permitted to see!</h5>
+        </div>
     </div>
+    <div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
+        <div class="pt-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    Your Order
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:text="${thatOrder.deliveryName}">deliveryName</li>
+                    <li class="list-group-item" th:text="${thatOrder.deliveryStreet}">deliveryStreet</li>
+                    <li class="list-group-item" th:text="${thatOrder.deliveryCity}">deliveryCity</li>
+                    <li class="list-group-item" th:text="${thatOrder.deliveryProv}">deliveryProv</li>
+                    <li class="list-group-item" >
+                        <ul>
+                            <li th:each="item : ${thatOrder?.items}">
+                                <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100)})|">item name</span>
+                                <ul>
+                                    <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100)})|"></li>
+                                    <li th:each="extra : ${item?.extras}">
+                                        <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|"></span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item" th:text="${#numbers.formatCurrency(thatOrder.finalPrice/100)}">grandTotal</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

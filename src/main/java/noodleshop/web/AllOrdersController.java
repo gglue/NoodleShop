@@ -38,13 +38,11 @@ public class AllOrdersController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public String showAllOrders(){
         return "allOrders";
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public String showSpecificOrder(@PathVariable String id, Model model){
         ManualOrder specificOrder = orderRepo.findById(Long.parseLong(id)).get();
         model.addAttribute("thatOrder", specificOrder);

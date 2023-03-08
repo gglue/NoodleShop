@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Edit Orders</title>
+    <title>All Orders</title>
 </head>
 </style>
 <body>
@@ -35,7 +35,7 @@
                     <th scope="col">Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody sec:authorize="hasRole('ROLE_ADMIN')">
                 <tr th:each="order : ${listOrders}">
                     <td th:text="${order.deliveryName}"></td>
                     <td th:text="${order.deliveryStreet} + ${', '} + ${order.deliveryCity} + ${', '} + ${order.deliveryPost}"></td>
@@ -59,6 +59,25 @@
                         </div>
                     </form>
                 </tr>
+            </tbody>
+            <tbody sec:authorize="hasRole('ROLE_USER')">
+            <tr th:each="order : ${listOrders}">
+                <div th:if="${#authentication.name == order.user.username}">
+                    <td th:text="${order.deliveryName}"></td>
+                    <td th:text="${order.deliveryStreet} + ${', '} + ${order.deliveryCity} + ${', '} + ${order.deliveryPost}"></td>
+                    <td>
+                        <a th:href="@{'/list/' + ${order.id}}" th:text="${#numbers.formatCurrency(order.finalPrice/100)}"></a>
+                    </td>
+                    <td th:text="${order.placedAt}"></td>
+                    <td>
+                        <span th:if="${order.status == 0}">Cancelled</span>
+                        <span th:if="${order.status == 1}">Not Ready</span>
+                        <span th:if="${order.status == 2}">Cooking</span>
+                        <span th:if="${order.status == 3}">On Delivery</span>
+                        <span th:if="${order.status == 4}">Completed</span>
+                    </td>
+                </div>
+            </tr>
             </tbody>
         </table>
 </body>

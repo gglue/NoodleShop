@@ -97,6 +97,7 @@
                         </div>
                     </div>
                     <input id="status" type="hidden" value="1" th:name="status">
+                    <input id="username" type="hidden" th:value="${#authentication.name}" th:name="username">
                     <div class="col-12 pt-3">
                         <div class="text-center">
                             <button class="btn btn-primary">Submit Order</button>

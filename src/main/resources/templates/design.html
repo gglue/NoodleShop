@@ -23,89 +23,49 @@
             </div>
         </div>
     </nav>
-    <!--
-    <div class="row">
-        <div class="col-8">
-            <div class="container">
-                <h1 class="pt-3">Create a New Item</h1>
-                <form method="POST" th:object="${item}">
-                    <div class="col">
-                        <label for="itemName" class="form-label">Name your Item</label>
-                        <input type="text" class="form-control" id="itemName" th:field="*{name}">
-                        <span class="validationError"
-                              th:if="${#fields.hasErrors('name')}"
-                              th:errors="*{name}">Item name error
-                        </span>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="description">Give a description</label>
-                            <textarea class="form-control" id="description" rows="5" th:field="*{desc}"></textarea>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <span class="form-label">Item Category</span>
-                        <div th:each="type :${itemTypes}">
-                            <input class="form-check-input" th:field="*{type}" type="radio" th:value="${type.id}"/>
-                            <span class="form-check-label" th:text="${type.desc}"></span></br>
-                        </div>
-                    </div>
-                    <!--
-                    <div class="col">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" th:field="*{price}">
-                        <span class="validationError"
-                              th:if="${#fields.hasErrors('price')}"
-                              th:errors="*{price}">Price error
-                        </span>
-                    </div>
-                    <div class="col">
-                        <label for="image" class="form-label">Placeholder image name</label>
-                        <input type="text" class="form-control" th:field="*{image}">
-                    </div>
-
-                    <div class="col pt-3 text-center">
-                        <button type="button" class="btn btn-light">Submit Item</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    -->
     <form method="POST" th:object="${item}">
         <div class = "container">
-            <h3>Name your item</h3>
-            <span class="validationError"
-                  th:if="${#fields.hasErrors('name')}"
-                  th:errors="*{name}">Item name error
-            </span>
-            <input type="text" th:field="*{name}"/>
-            <h3>Give a description</h3>
-            <textarea th:field="*{desc}" rows="4" cols="50"></textarea>
-            <h3>Item type</h3>
-            <span class="validationError"
-                  th:if="${#fields.hasErrors('type')}"
-                  th:errors="*{type}">Item type error
-            </span>
-            <div th:each="type :${itemTypes}">
-                <input th:field="*{type}" type="radio" th:value="${type.id}"/>
-                <span th:text="${type.desc}"></span></br>
+            <h1 class="pt-3">Create a New Item</h1>
+            <div class="col">
+                <label for="itemName" class="form-label">Name your Item</label>
+                <input type="text" class="form-control" id="itemName" th:field="*{name}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Item name error
+                        </span>
             </div>
-            <h3>Price</h3>
-            <span class="validationError"
-                  th:if="${#fields.hasErrors('price')}"
-                  th:errors="*{price}">Price error
-            </span>
-            <input type="text" th:field="*{price}":/>
-
-            <h3>Image</h3>
-            <span class="validationError"
-                  th:if="${#fields.hasErrors('image')}"
-                  th:errors="*{image}">Price error
-            </span>
-            <input type="text" th:field="*{image}":/>
-
-            <button>Submit Item</button>
+            <div class="col">
+                <div class="form-group">
+                    <label for="description">Give a description</label>
+                    <textarea class="form-control" id="description" rows="5" th:field="*{desc}"></textarea>
+                </div>
+            </div>
+            <div class="col">
+                <span class="form-label">Item Category</span>
+                <div th:each="type :${itemTypes}">
+                    <input class="form-check-input" th:field="*{type}" type="radio" th:value="${type.id}"/>
+                    <span class="form-check-label" th:text="${type.desc}"></span></br>
+                </div>
+            </div>
+            <div class="col">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" class="form-control" th:field="*{price}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('price')}"
+                      th:errors="*{price}">Price error
+                        </span>
+            </div>
+            <div class="col">
+                <label for="image" class="form-label">Placeholder image name</label>
+                <input type="text" class="form-control" th:field="*{image}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('image')}"
+                      th:errors="*{image}">Price error
+                </span>
+            </div>
+            <div class="pt-3">
+                <button type="submit" class="btn btn-light">Submit Item</button>
+            </div>
         </div>
     </form>
 

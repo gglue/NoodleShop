@@ -23,32 +23,32 @@
             </div>
         </div>
     </nav>
-    <h1>Select items from menu</h1>
-    <form method="POST" th:object="${customItem}" id="menu">
+    <h1 class="pt-3 text-center">Select Items from Menu</h1>
         <div class="container">
             <div class="row">
                 <div th:each="item : ${items}" class="col-3">
                     <div class="card">
                         <img th:src="@{${'noodle/images/' + item.image}}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" role="button" aria-controls="collapseExample" th:text="${item.name}" th:title="${item.desc}"></h5>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    <div th:each="extra : ${extras}">
-                                        <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
-                                        <span class="text-left" th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|">EXTRA</span><br/>
+                            <form method="POST" th:object="${customItem}" id="menu">
+                                <h5 class="card-title" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" role="button" aria-controls="collapseExample" th:text="${item.name}" th:title="${item.desc}"></h5>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <div th:each="extra : ${extras}">
+                                            <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
+                                            <span class="text-left" th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|">EXTRA</span><br/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <p class="card-text" th:text="${#numbers.formatCurrency(item.price/100)}"></p>
-                            <input id="yeet" type="hidden" th:value="${item.id}" th:name="item">
-                            <button class="btn btn-primary" th:food-number="${item.id}" th:onclick="changeItem(this.getAttribute('food-number'))">Add to Cart</button>
+                                <p class="card-text" th:text="${#numbers.formatCurrency(item.price/100)}"></p>
+                                <input id="yeet" type="hidden" th:value="${item.id}" th:name="item">
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
     <h1>Current selected items</h1>
     <ul>
         <li th:each="item : ${manualOrder?.items}">
@@ -63,10 +63,5 @@
     </ul>
     <h2>Total Price: <span th:text="${#numbers.formatCurrency(manualOrder?.finalPrice/100)}"></span></h2>
     <a th:href="@{/orders/current}" id>Checkout your order.</a>
-    <script>
-        function changeItem(itemID) {
-            document.getElementById("yeet").value = itemID;
-        }
-    </script>
 </body>
 </html>
