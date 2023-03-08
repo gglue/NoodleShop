@@ -20,8 +20,11 @@ public class Item {
     @ManyToOne
     private ItemType type;
 
+    @NotNull(message="Give it a nice description.")
     private String desc;
 
+    @NotNull
+    @Size(min=1, message="Please use a placeholder image.")
     private String image;
 
     @Min(message="Item show be at least be 1 dollar.", value=100)
