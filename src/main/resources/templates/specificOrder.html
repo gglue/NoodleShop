@@ -38,22 +38,22 @@
                 <li class="list-group-item" >
                     <ul>
                         <li th:each="item : ${thatOrder?.items}">
-                            <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100)})|">item name</span>
+                            <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100.0)})|">item name</span>
                             <ul>
-                                <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100)})|"></li>
+                                <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100.0)})|"></li>
                                 <li th:each="extra : ${item?.extras}">
-                                    <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|"></span>
+                                    <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100.0)})|"></span>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
-                <li class="list-group-item" th:text="${#numbers.formatCurrency(thatOrder.finalPrice/100)}">grandTotal</li>
+                <li class="list-group-item" th:text="${#numbers.formatCurrency(thatOrder.finalPrice/100.0)}">grandTotal</li>
 
             </ul>
         </div>
         </div>
-        <div class="pt-3">
+        <div class="pt-3" th:if="${(#authentication.name != thatOrder.user.username)}">
             <h5>Order not found or not permitted to see!</h5>
         </div>
     </div>

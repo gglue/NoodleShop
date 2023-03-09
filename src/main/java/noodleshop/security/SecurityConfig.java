@@ -98,6 +98,8 @@ public class SecurityConfig  {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .invalidateHttpSession(true)
                 .and()
+                .headers().frameOptions().disable()
+                .and()
                 //.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(withDefaults())
