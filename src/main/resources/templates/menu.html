@@ -19,6 +19,7 @@
                 <a class="nav-link text-white" href="#" th:href="@{/select}">Menu</a>
                 <a class="nav-link text-white" href="#" th:href="@{/list}">Orders</a>
                 <a class="nav-link text-white" href="#" th:href="@{/design}">Design</a>
+                <a class="nav-link text-white" href="#" th:href="@{/register}" th:if="${#authentication.name == 'anonymousUser'}">Register</a>
             </div>
         </div>
     </div>
