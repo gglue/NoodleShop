@@ -24,6 +24,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -91,6 +92,11 @@ public class SecurityConfig  {
                     .antMatchers("/design/**", "/h2-console/**").hasRole("ADMIN")
                     .antMatchers("/orders/**", "/select/**", "/list/**").hasAnyRole("ADMIN","USER")
                     .antMatchers("/", "/**").access("permitAll()")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .invalidateHttpSession(true)
                 .and()
                 //.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

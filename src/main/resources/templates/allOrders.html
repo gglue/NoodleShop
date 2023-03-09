@@ -40,7 +40,7 @@
                     <td th:text="${order.deliveryName}"></td>
                     <td th:text="${order.deliveryStreet} + ${', '} + ${order.deliveryCity} + ${', '} + ${order.deliveryPost}"></td>
                     <td>
-                        <a th:href="@{'/list/' + ${order.id}}" th:text="${#numbers.formatCurrency(order.finalPrice/100)}"></a>
+                        <a th:href="@{'/list/' + ${order.id}}" th:text="${#numbers.formatCurrency(order.finalPrice/100.0)}"></a>
                     </td>
                     <td th:text="${order.placedAt}"></td>
                     <form method ="POST" th:action="@{/list}">

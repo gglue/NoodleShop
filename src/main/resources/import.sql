@@ -20,6 +20,16 @@ insert into Item (name, type_id, desc, image, price) values ('Magic Chicken', 0,
 insert into Item (name, type_id, desc, image, price) values ('Smokey Duck', 0, 'Smoked duck is a specialty of Szechuan that is known for its complex cooking process. Our juicy smoked duck breast is marinated, smoked, and braised to perfection, and is an excellent pair for our wholesome noodle soup.', 'smokeyduck.png', 1299);
 insert into Item (name, type_id, desc, image, price) values ('Tree Hugger', 0, 'The perfect vegetarian option, the Tree Hugger features our chewy freshly-made noodles, submerged in our light refreshing vegetable stock, topped with tasty veggies, shiitake mushrooms and fried egg.', 'treehugger.png', 1099);
 
+insert into Item (name, type_id, desc, image, price) values ('Yang Kebab', 1, 'Our juicy lamb kebabs are freshly marinated and barbecued with traditional spices like cumin and pepper for a mouthwatering taste.', 'kebab.png', 299);
+insert into Item (name, type_id, desc, image, price) values ('Popcorn Chicken', 1, 'Marinated pieces of boneless chicken are deep-fried to crispy perfection and sprinkled with salt and pepper for a juicy, irresistible flavour.', 'popcorn.png', 699);
+insert into Item (name, type_id, desc, image, price) values ('Pumpkin Cake', 1, 'Made with fresh pumpkin puree and sticky rice flour, its soft, chewy texture with a natural sweetness makes it a treat for all.', 'pumpkin.png', 459);
+insert into Item (name, type_id, desc, image, price) values ('Nom Nom Chicken Cake', 1, 'This famous Szechuan cold dish features tender stewed chicken mixed with our special sauce that will leave a nutty, flavourful and tingly sensation.', 'nom.png', 899);
+
+insert into Item (name, type_id, desc, image, price) values ('Coca Cola', 2, 'Refreshing Coca-Cola at ice-cold perfection.', 'cola.png', 199);
+insert into Item (name, type_id, desc, image, price) values ('Green Lemonade', 2, 'Freshen up with our house special lemonade made from 100% freshly squeezed lemons.', 'green.png', 499);
+
+
+
 insert into Noodle_User (full_name, password, username, is_Admin) values ('Victor Li', '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG', 'admin', 1);
 insert into Noodle_User (full_name, password, username, is_Admin) values ('Tom Ling',  '$2a$10$/qEEdpq7dcQdp.u5Tbp7lekyIUFxF2B166BQPAqHHiCJzeBwWUViG', 'customer', 0);
 

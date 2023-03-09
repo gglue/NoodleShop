@@ -111,16 +111,16 @@
                 <h5>Checkout Cart</h5>
                 <ul>
                     <li th:each="item : ${manualOrder?.items}">
-                        <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100)})|">item name</span>
-                        <ul>
-                            <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100)})|"></li>
+                        <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100.0)})|">item name</span>
+                        <ul th:if="${item.item.type.id == 0}">
+                            <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100.0)})|"></li>
                             <li th:each="extra : ${item?.extras}">
-                                <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|"></span>
+                                <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100.0)})|"></span>
                             </li>
                         </ul>
                     </li>
                 </ul>
-                <h3>Total Price: <span th:text="${#numbers.formatCurrency(manualOrder?.finalPrice/100)}"></span></h3>
+                <h3>Total Price: <span th:text="${#numbers.formatCurrency(manualOrder?.finalPrice/100.0)}"></span></h3>
             </div>
         </div>
     </div>

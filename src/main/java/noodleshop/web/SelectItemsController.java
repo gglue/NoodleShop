@@ -71,9 +71,10 @@ public class SelectItemsController {
         //    log.info("Error.", customItem);
         //    return "menu";
         //}
-
-        for (Extra e : customItem.getExtras()){
-            customItem.setTotalPrice(customItem.getTotalPrice() + e.getPrice());
+        if (customItem.getItem().getType().getId() == 0){
+            for (Extra e : customItem.getExtras()){
+                customItem.setTotalPrice(customItem.getTotalPrice() + e.getPrice());
+            }
         }
         customItem.setTotalPrice(customItem.getTotalPrice() + customItem.getItem().getPrice());
         manualOrder.addItem(customItem);

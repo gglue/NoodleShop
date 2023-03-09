@@ -6,62 +6,93 @@
     <title>Menu</title>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <nav class="navbar navbar-expand-lg navbar-light bg-success">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white">NoodleShop</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active text-white" aria-current="page" href="#" th:href="@{/}">Home</a>
-                    <a class="nav-link text-white" href="#" th:href="@{/select}">Menu</a>
-                    <a class="nav-link text-white" href="#" th:href="@{/list}">Orders</a>
-                    <a class="nav-link text-white" href="#" th:href="@{/design}">Design</a>
-                </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white">NoodleShop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active text-white" aria-current="page" href="#" th:href="@{/}">Home</a>
+                <a class="nav-link text-white" href="#" th:href="@{/select}">Menu</a>
+                <a class="nav-link text-white" href="#" th:href="@{/list}">Orders</a>
+                <a class="nav-link text-white" href="#" th:href="@{/design}">Design</a>
             </div>
         </div>
-    </nav>
-    <h1 class="pt-3 text-center">Select Items from Menu</h1>
-        <div class="container">
-            <div class="row">
-                <div th:each="item : ${items}" class="col-3">
-                    <div class="card">
-                        <img th:src="@{${'noodle/images/' + item.image}}" alt="Card image cap">
-                        <div class="card-body">
-                            <form method="POST" th:object="${customItem}" id="menu">
-                                <h5 class="card-title" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" role="button" aria-controls="collapseExample" th:text="${item.name}" th:title="${item.desc}"></h5>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <div th:each="extra : ${extras}">
-                                            <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
-                                            <span class="text-left" th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|">EXTRA</span><br/>
-                                        </div>
-                                    </div>
+    </div>
+</nav>
+<h1 class="pt-3 text-center">Select Items from Menu</h1>
+<div class="container">
+    <div class="row">
+        <h3>Noodles</h3>
+        <div th:each="item : ${items}" class="col-3">
+            <div class="pt-3">
+            <div class="card" th:if="${item.type.id == 0}">
+                <img th:src="@{${'noodle/images/' + item.image}}" alt="Card image cap">
+                <div class="card-body">
+                    <form method="POST" th:object="${customItem}" id="menu">
+                        <h5 class="card-title" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" role="button" aria-controls="collapseExample" th:text="${item.name}" th:title="${item.desc}"></h5>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <div th:each="extra : ${extras}">
+                                    <input th:field="*{extras}" type="checkbox" th:value="${extra.id}"/>
+                                    <span class="text-left" th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100.0)})|">EXTRA</span><br/>
                                 </div>
-                                <p class="card-text" th:text="${#numbers.formatCurrency(item.price/100)}"></p>
-                                <input id="yeet" type="hidden" th:value="${item.id}" th:name="item">
-                                <button class="btn btn-primary">Add to Cart</button>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                        <p class="card-text" th:text="${#numbers.formatCurrency(item.price/100.0)}"></p>
+                        <input id="yeet" type="hidden" th:value="${item.id}" th:name="item">
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <h3>Sides</h3>
+        <div th:each="item : ${items}" class="col-3">
+            <div class="card h-100 w-100" th:if="${item.type.id == 1}">
+                <img th:src="@{${'side/images/' + item.image}}" alt="Card image cap">
+                <div class="card-body">
+                    <form method="POST" th:object="${customItem}" id="menu">
+                        <h5 class="card-title" th:text="${item.name}" th:title="${item.desc}"></h5>
+                        <p class="card-text" th:text="${#numbers.formatCurrency(item.price/100.0)}"></p>
+                        <input id="yeet" type="hidden" th:value="${item.id}" th:name="item">
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>
-    <h1>Current selected items</h1>
-    <ul>
-        <li th:each="item : ${manualOrder?.items}">
-            <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100)})|">item name</span>
-            <ul>
-                <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100)})|"></li>
-                <li th:each="extra : ${item?.extras}">
-                    <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100)})|"></span>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <h2>Total Price: <span th:text="${#numbers.formatCurrency(manualOrder?.finalPrice/100)}"></span></h2>
-    <a th:href="@{/orders/current}" id>Checkout your order.</a>
+        <h3 class="pb-3 pt-3">Drinks</h3>
+        <div th:each="item : ${items}" class="col-3">
+            <div class="card" th:if="${item.type.id == 2}">
+                <img th:src="@{${'drinks/images/' + item.image}}" alt="Card image cap">
+                <div class="card-body">
+                    <form method="POST" th:object="${customItem}" id="menu">
+                        <h5 class="card-title" th:text="${item.name}" th:title="${item.desc}"></h5>
+                        <p class="card-text" th:text="${#numbers.formatCurrency(item.price/100.0)}"></p>
+                        <input id="yeet" type="hidden" th:value="${item.id}" th:name="item">
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>Current selected items</h1>
+<ul>
+    <li th:each="item : ${manualOrder?.items}">
+        <span th:text="|${item.item.name} (${#numbers.formatCurrency(item.totalPrice/100.0)})|">item name</span>
+        <ul th:if="${item.item.type.id == 0}">
+            <li th:text="|${item.item.name} (${#numbers.formatCurrency(item.item.price/100.0)})|"></li>
+            <li th:each="extra : ${item?.extras}">
+                <span th:text="|${extra.name} (${#numbers.formatCurrency(extra.price/100.0)})|"></span>
+            </li>
+        </ul>
+    </li>
+</ul>
+<h2>Total Price: <span th:text="${#numbers.formatCurrency(manualOrder?.finalPrice/100.0)}"></span></h2>
+<a th:href="@{/orders/current}" id>Checkout your order.</a>
 </body>
 </html>
